@@ -34,12 +34,6 @@ class TaskController extends FOSRestController implements ClassResourceInterface
      */
     private $taskRepository;
 
-    /**
-     * temporary
-     * @var User
-     */
-    private $user;
-
     public function __construct(
         EntityManagerInterface $entityManager,
         TaskRepository $taskRepository
