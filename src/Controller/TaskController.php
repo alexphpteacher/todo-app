@@ -18,6 +18,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\VarDumper\VarDumper;
 
 /**
+ * @Rest\Prefix("api")
  * @Rest\RouteResource(
  *     "Task",
  *     pluralize=false
