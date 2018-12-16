@@ -8,6 +8,7 @@
         "friendsofsymfony/rest-bundle": "^2.4",
         "friendsofsymfony/user-bundle": "^2.1",
         "jms/serializer-bundle": "^2.4",
+        "lexik/jwt-authentication-bundle": "^2.6",
         "nelmio/cors-bundle": "^1.5",
         "sensio/framework-extra-bundle": "^5.2",
         "swiftmailer/swiftmailer": "^6.1",
