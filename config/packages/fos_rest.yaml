@@ -4,6 +4,7 @@ fos_rest:
         include_format: false
     format_listener:
         rules:
+            - { path: ^/(login|register|logout), stop: true}
             - { path: ^/, prefer_extension: false, fallback_format: xml, priorities: [ xml, json ] }
     view:
         view_response_listener:
