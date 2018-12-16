@@ -1,5 +1,14 @@
 # Read the documentation: https://symfony.com/doc/master/bundles/FOSRestBundle/index.html
-fos_rest: ~
+fos_rest:
+    routing_loader:
+        include_format: false
+    format_listener:
+        rules:
+            - { path: ^/, prefer_extension: false, fallback_format: xml, priorities: [ xml, json ] }
+    view:
+        view_response_listener:
+            enabled: true
+            force: true
 #    param_fetcher_listener:  true
 #    allowed_methods_listener:  true
 #    routing_loader: true
