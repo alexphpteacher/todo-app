@@ -6,30 +6,31 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User
+class User extends BaseUser
 {
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    protected $id;
 
-    /**
-     * @Assert\NotBlank()
-     * @ORM\Column(type="string", length=50)
-     */
-    private $username;
+//    /**
+//     * @Assert\NotBlank()
+//     * @ORM\Column(type="string", length=50)
+//     */
+//    protected $username;
 
-    /**
-     * @Assert\NotBlank()
-     * @ORM\Column(type="string", length=50)
-     */
-    private $password;
+//    /**
+//     * @Assert\NotBlank()
+//     * @ORM\Column(type="string", length=50)
+//     */
+//    protected $password;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Task", mappedBy="user")
@@ -51,7 +52,7 @@ class User
         return $this->username;
     }
 
-    public function setUsername(string $username): self
+    public function setUsername($username): self
     {
         $this->username = $username;
 
@@ -63,7 +64,7 @@ class User
         return $this->password;
     }
 
-    public function setPassword(string $password): self
+    public function setPassword($password): self
     {
         $this->password = $password;
 
