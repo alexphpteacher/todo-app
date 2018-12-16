@@ -54,7 +54,7 @@ class FullTaskFlowTest extends WebTestCase
      */
     public function testGetTask($data) {
         static::$client->request(
-            'get',
+            'GET',
             '/api/task/'.$data['id'],
             [],
             [],
@@ -106,7 +106,7 @@ class FullTaskFlowTest extends WebTestCase
      */
     public function testGetUpdatedTask($data) {
         static::$client->request(
-            'get',
+            'GET',
             '/api/task/'.$data['id'],
             [],
             [],
@@ -127,5 +127,101 @@ class FullTaskFlowTest extends WebTestCase
         return $data;
     }
 
+    /**
+     * @depends testGetUpdatedTask
+     */
+    public function testGetTasks($data) {
+        static::$client->request(
+            'GET',
+            '/api/task',
+            [],
+            [],
+            [
+                'HTTP_JWT_AUTHORIZATION' => static::$token,
+                'HTTP_ACCEPT' => 'application/json',
+                'CONTENT_TYPE' => 'application/json',
+            ]
+        );
+        $response = static::$client->getResponse();
 
+        $this->assertTrue($response->isSuccessful());
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertJson($response->getContent());
+
+        $this->assertJsonStringEqualsJsonString(json_encode([$data]), $response->getContent());
+
+        return $data;
+    }
+
+    /**
+     * @depends testGetTasks
+     */
+    public function testDeleteTask($data) {
+        static::$client->request(
+            'DELETE',
+            '/api/task/'.$data['id'],
+            [],
+            [],
+            [
+                'HTTP_JWT_AUTHORIZATION' => static::$token,
+                'HTTP_ACCEPT' => 'application/json',
+                'CONTENT_TYPE' => 'application/json',
+            ]
+        );
+        $response = static::$client->getResponse();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertEquals(204, $response->getStatusCode());
+
+        return $data;
+    }
+
+    /**
+     * @depends testDeleteTask
+     */
+    public function testgetDeletedTask($data) {
+        static::$client->request(
+            'GET',
+            '/api/task/'.$data['id'],
+            [],
+            [],
+            [
+                'HTTP_JWT_AUTHORIZATION' => static::$token,
+                'HTTP_ACCEPT' => 'application/json',
+                'CONTENT_TYPE' => 'application/json',
+            ]
+        );
+        $response = static::$client->getResponse();
+
+        $this->assertTrue($response->isClientError());
+        $this->assertEquals(404, $response->getStatusCode());
+
+        return $data;
+    }
+
+    /**
+     * @depends testgetDeletedTask
+     */
+    public function testGetTasksAfterDelete($data) {
+        static::$client->request(
+            'GET',
+            '/api/task',
+            [],
+            [],
+            [
+                'HTTP_JWT_AUTHORIZATION' => static::$token,
+                'HTTP_ACCEPT' => 'application/json',
+                'CONTENT_TYPE' => 'application/json',
+            ]
+        );
+        $response = static::$client->getResponse();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertJson($response->getContent());
+
+        $this->assertJsonStringEqualsJsonString(json_encode([]), $response->getContent());
+
+        return $data;
+    }
 }

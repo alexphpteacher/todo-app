@@ -31,6 +31,11 @@ trait AuthorizedTestCaseTrait
     protected static $token;
 
     /**
+     * @var String
+     */
+    protected static $anotherToken;
+
+    /**
      * @beforeClass
      */
     public static function someInit(){
@@ -53,6 +58,19 @@ trait AuthorizedTestCaseTrait
             json_encode(['username' => 'alex', 'password' => 'alex'])
         );
         static::$token = 'Bearer ' . json_decode(static::$client->getResponse()->getContent())->token;
+
+        static::$client->request(
+            'POST',
+            '/api/login_check',
+            [],
+            [],
+            [
+                'HTTP_ACCEPT' => 'application/json',
+                'CONTENT_TYPE' => 'application/json',
+            ],
+            json_encode(['username' => 'spam', 'password' => 'spam'])
+        );
+        static::$anotherToken = 'Bearer ' . json_decode(static::$client->getResponse()->getContent())->token;
     }
 
 }
