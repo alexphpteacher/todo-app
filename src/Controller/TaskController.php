@@ -2,20 +2,18 @@
 
 namespace App\Controller;
 
-use App\Entity\Album;
 use App\Entity\Task;
 use App\Entity\User;
-use App\Form\AlbumType;
 use App\Form\TaskType;
 use App\Repository\TaskRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\FOSRestController;
+use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\VarDumper\VarDumper;
 
 /**
  * @Rest\Prefix("api")
@@ -49,8 +47,6 @@ class TaskController extends FOSRestController implements ClassResourceInterface
     {
         $this->entityManager = $entityManager;
         $this->taskRepository = $taskRepository;
-
-        $this->user = $this->entityManager->getRepository(User::class)->find(1);
     }
 
     /**
@@ -63,7 +59,7 @@ class TaskController extends FOSRestController implements ClassResourceInterface
     {
         $tasks = $this->taskRepository->findBy([
             'id' => $id,
-            'user' => $this->user,
+            'user' => $this->getUser(),
         ]);
 
         if (0 === count($tasks)) {
@@ -77,7 +73,7 @@ class TaskController extends FOSRestController implements ClassResourceInterface
         Request $request
     ) {
         $task = new Task();
-        $task->setUser($this->user);
+        $task->setUser($this->getUser());
 
         $form = $this->createForm(TaskType::class, $task);
 
@@ -133,6 +129,6 @@ class TaskController extends FOSRestController implements ClassResourceInterface
 
     public function cgetAction()
     {
-        return $this->user->getTasks();
+        return $this->getUser()->getTasks();
     }
 }
