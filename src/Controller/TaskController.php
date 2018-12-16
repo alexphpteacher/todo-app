@@ -87,12 +87,14 @@ class TaskController extends FOSRestController implements ClassResourceInterface
             return $form;
         }
 
-        $this->entityManager->persist($form->getData());
+        $obj = $form->getData();
+        $this->entityManager->persist($obj);
         $this->entityManager->flush();
 
         return $this->view(
             [
                 'status' => 'ok',
+                'id' => $obj->getId(),
             ],
             Response::HTTP_CREATED
         );
