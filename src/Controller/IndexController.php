@@ -16,7 +16,7 @@ use FOS\RestBundle\Controller\Annotations;
 class IndexController extends FOSRestController
 {
     /**
-     * @Annotations\Get("/", name="api_info")
+     * @Annotations\Get("/api", name="api_info")
      */
     public function index()
     {
