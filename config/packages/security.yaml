@@ -11,6 +11,10 @@ security:
             id: fos_user.user_provider.username
 
     firewalls:
+        doc:
+            pattern: ^/api/doc
+            stateless: true
+            anonymous: true
         login:
             pattern:  ^/api/login
             stateless: true
@@ -37,6 +41,7 @@ security:
             logout:       true
             anonymous:    true
     access_control:
+        - { path: ^/api/doc, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }

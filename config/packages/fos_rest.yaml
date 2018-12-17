@@ -5,6 +5,7 @@ fos_rest:
     format_listener:
         rules:
 #            - { path: ^/(login|register|logout), stop: true}
+            - { path: ^/api/doc, stop: true }
             - { path: ^/api, prefer_extension: false, fallback_format: xml, priorities: [ xml, json ] }
             - { path: ^/, stop: true}
     view:
