@@ -1,0 +1,6 @@
+1. git clone https://github.com/alexphpteacher/todo-app.git [<your_directory_name>]
+2. cd <your_directory_name>
+3. composer install
+4. in file .env.test edit DATABASE_URL parameter to your database
+5. bin/console doctrine:schema:update --force
+6. bin/phpunit
