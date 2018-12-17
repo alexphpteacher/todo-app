@@ -10,11 +10,13 @@ namespace App\Tests;
 
 
 use App\Tests\Traits\AuthorizedTestCaseTrait;
+use App\Tests\Traits\DateTimeTrait;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class FullTaskFlowTest extends WebTestCase
 {
     use AuthorizedTestCaseTrait;
+    use DateTimeTrait;
 
     /**
      * @return array
@@ -24,7 +26,7 @@ class FullTaskFlowTest extends WebTestCase
         $data = [
             "content" => "first test task1",
             "completed" => false,
-            "created_at" => "2011-12-05T12:00:00+02:00"
+            "created_at" => self::getTimeCTZ("2011-12-05T12:00:00+02:00")
         ];
         static::$client->request(
             'POST',
