@@ -16,6 +16,9 @@ class FullTaskFlowTest extends WebTestCase
 {
     use AuthorizedTestCaseTrait;
 
+    /**
+     * @return array
+     */
     public function testPostTaskReturnId()
     {
         $data = [
@@ -51,6 +54,8 @@ class FullTaskFlowTest extends WebTestCase
 
     /**
      * @depends testPostTaskReturnId
+     * @param array $data
+     * @return array
      */
     public function testGetTask($data) {
         static::$client->request(
@@ -77,6 +82,8 @@ class FullTaskFlowTest extends WebTestCase
 
     /**
      * @depends testGetTask
+     * @param array $data
+     * @return array
      */
     public function testPutTask($data) {
         $data['content'] = 'some new content';
@@ -103,6 +110,8 @@ class FullTaskFlowTest extends WebTestCase
 
     /**
      * @depends testPutTask
+     * @param array $data
+     * @return array
      */
     public function testGetUpdatedTask($data) {
         static::$client->request(
@@ -129,6 +138,8 @@ class FullTaskFlowTest extends WebTestCase
 
     /**
      * @depends testGetUpdatedTask
+     * @param array $data
+     * @return array
      */
     public function testGetTasks($data) {
         static::$client->request(
@@ -155,6 +166,8 @@ class FullTaskFlowTest extends WebTestCase
 
     /**
      * @depends testGetTasks
+     * @param array $data
+     * @return array
      */
     public function testDeleteTask($data) {
         static::$client->request(
@@ -178,6 +191,8 @@ class FullTaskFlowTest extends WebTestCase
 
     /**
      * @depends testDeleteTask
+     * @param array $data
+     * @return array
      */
     public function testgetDeletedTask($data) {
         static::$client->request(
@@ -201,6 +216,8 @@ class FullTaskFlowTest extends WebTestCase
 
     /**
      * @depends testgetDeletedTask
+     * @param array $data
+     * @return array
      */
     public function testGetTasksAfterDelete($data) {
         static::$client->request(

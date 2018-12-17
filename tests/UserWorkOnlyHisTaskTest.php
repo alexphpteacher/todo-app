@@ -8,7 +8,6 @@
 
 namespace App\Tests;
 
-
 use App\Tests\Traits\AuthorizedTestCaseTrait;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -16,7 +15,8 @@ class UserWorkOnlyHisTaskTest extends WebTestCase
 {
     use AuthorizedTestCaseTrait;
 
-    public function testAnotherUserPostTask() {
+    public function testAnotherUserPostTask()
+    {
         $data = [
             "content" => "task of the second user",
             "completed" => true,
@@ -50,8 +50,11 @@ class UserWorkOnlyHisTaskTest extends WebTestCase
 
     /**
      * @depends testAnotherUserPostTask
+     * @param array $anotherData
+     * @return array
      */
-    public function testGetTask($anotherData) {
+    public function testGetTask($anotherData)
+    {
         //user 1 get another user's task
         static::$client->request(
             'GET',
@@ -74,8 +77,11 @@ class UserWorkOnlyHisTaskTest extends WebTestCase
 
     /**
      * @depends testGetTask
+     * @param array $anotherData
+     * @return array
      */
-    public function testPutTask($anotherData) {
+    public function testPutTask($anotherData)
+    {
         static::$client->request(
             'PUT',
             '/api/task/'.$anotherData['id'],
@@ -98,8 +104,11 @@ class UserWorkOnlyHisTaskTest extends WebTestCase
 
     /**
      * @depends testPutTask
+     * @param array $anotherData
+     * @return array
      */
-    public function testGetTasks($anotherData) {
+    public function testGetTasks($anotherData)
+    {
         static::$client->request(
             'GET',
             '/api/task',
@@ -124,8 +133,11 @@ class UserWorkOnlyHisTaskTest extends WebTestCase
 
     /**
      * @depends testGetTasks
+     * @param array $anotherData
+     * @return array
      */
-    public function testDeleteTask($anotherData) {
+    public function testDeleteTask($anotherData)
+    {
         static::$client->request(
             'DELETE',
             '/api/task/'.$anotherData['id'],

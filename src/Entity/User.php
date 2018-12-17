@@ -5,7 +5,6 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use FOS\UserBundle\Model\User as BaseUser;
 
 /**
@@ -20,18 +19,6 @@ class User extends BaseUser
      */
     protected $id;
 
-//    /**
-//     * @Assert\NotBlank()
-//     * @ORM\Column(type="string", length=50)
-//     */
-//    protected $username;
-
-//    /**
-//     * @Assert\NotBlank()
-//     * @ORM\Column(type="string", length=50)
-//     */
-//    protected $password;
-
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Task", mappedBy="user")
      */
@@ -39,6 +26,7 @@ class User extends BaseUser
 
     public function __construct()
     {
+        parent::__construct();
         $this->tasks = new ArrayCollection();
     }
 

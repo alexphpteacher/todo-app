@@ -8,7 +8,6 @@
 
 namespace App\Controller;
 
-
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use FOS\RestBundle\Controller\Annotations;

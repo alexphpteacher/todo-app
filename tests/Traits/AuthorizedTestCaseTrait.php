@@ -8,10 +8,8 @@
 
 namespace App\Tests\Traits;
 
-
 use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Console\Input\StringInput;
 
 /**
@@ -37,8 +35,10 @@ trait AuthorizedTestCaseTrait
 
     /**
      * @beforeClass
+     * @throws \Exception
      */
-    public static function someInit(){
+    public static function someInit()
+    {
         static::$client = static::createClient();
 
         $kernel = static::$client->getKernel();
@@ -72,5 +72,4 @@ trait AuthorizedTestCaseTrait
         );
         static::$anotherToken = 'Bearer ' . json_decode(static::$client->getResponse()->getContent())->token;
     }
-
 }

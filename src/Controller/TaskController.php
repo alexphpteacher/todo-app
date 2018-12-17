@@ -3,12 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Task;
-use App\Entity\User;
 use App\Form\TaskType;
 use App\Repository\TaskRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\FOSRestController;
-use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -37,8 +35,7 @@ class TaskController extends FOSRestController implements ClassResourceInterface
     public function __construct(
         EntityManagerInterface $entityManager,
         TaskRepository $taskRepository
-    )
-    {
+    ) {
         $this->entityManager = $entityManager;
         $this->taskRepository = $taskRepository;
     }

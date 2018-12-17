@@ -2,7 +2,7 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\User;
+
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -28,11 +28,12 @@ class AppFixtures extends Fixture implements ContainerAwareInterface
         ],
     ];
 
-    protected function loadUserData() {
+    protected function loadUserData()
+    {
         /* @var $userManager \FOS\UserBundle\Model\UserManager */
         $userManager = $this->container->get('fos_user.user_manager');
 
-        foreach($this->userData as $role => $data) {
+        foreach ($this->userData as $role => $data) {
             $user = $userManager->createUser();
 
             $user->setUsername($data['username']);
@@ -43,7 +44,7 @@ class AppFixtures extends Fixture implements ContainerAwareInterface
 
             $user->setRoles(['ROLE_USER', $role]);
 
-            $userManager->updateUser($user, true);
+            $userManager->updateUser($user);
         }
     }
 
@@ -58,6 +59,7 @@ class AppFixtures extends Fixture implements ContainerAwareInterface
 
     /**
      * Sets the container.
+     * @param ContainerInterface|null $container
      */
     public function setContainer(ContainerInterface $container = null)
     {

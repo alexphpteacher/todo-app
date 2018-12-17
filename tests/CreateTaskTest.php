@@ -9,11 +9,7 @@
 namespace App\Tests;
 
 
-use App\DataFixtures\AppFixtures;
 use App\Tests\Traits\AuthorizedTestCaseTrait;
-use Symfony\Bundle\FrameworkBundle\Client;
-use Symfony\Bundle\FrameworkBundle\Console\Application;
-use Symfony\Component\Console\Input\StringInput;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class CreateTaskTest extends WebTestCase
